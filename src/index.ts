@@ -1,4 +1,3 @@
-
 type SASinput = {
   accountKey: string
   accountName: string
@@ -23,11 +22,12 @@ const truncatedISO8061Date = (date: Date) => {
   return dateString.substring(0, dateString.length - 5) + 'Z'
 }
 
-const computeHMACSHA256 = async (stringToSign: string, accountKey: string) => {
+const computeHMACSHA256 = async (stringToSign: string, accountKey: string): Promise<string> => {
   const enc = new TextEncoder()
   const signatureUTF8 = enc.encode(stringToSign)
   const key = await crypto.subtle.importKey(
     'raw',
+    //@ts-ignore
     Buffer.from(accountKey, 'base64'),
     {
       name: 'HMAC',
@@ -41,6 +41,7 @@ const computeHMACSHA256 = async (stringToSign: string, accountKey: string) => {
 
   const digest = await crypto.subtle.sign('HMAC', key, signatureUTF8)
 
+  //@ts-ignore
   return Buffer.from(digest).toString('base64')
 }
 
@@ -57,39 +58,51 @@ const getSASqueryParams = async (input: SASinput) => {
   const version = '2018-11-09'
   const signedSnapshotTime = undefined
 
-  const stringToSign = [
-    input.permissions ? input.permissions : '',
-    input.startsOn ? truncatedISO8061Date(input.startsOn) : '',
-    truncatedISO8061Date(input.expiresOn),
-    getCanonicalName(input.accountName, input.containerName, input.blobName),
-    input.identifier ? input.identifier : '',
-    input.ipRange ? input.ipRange : '',
-    input.protocol ? input.protocol : '',
-    version,
-    resource,
-    signedSnapshotTime,
-    input.cacheControl ? input.cacheControl : '',
-    input.contentDisposition ? input.contentDisposition : '',
-    input.contentEncoding ? input.contentEncoding : '',
-    input.contentLanguage ? input.contentLanguage : '',
-    input.contentType ? input.contentType : '',
-  ].join('\n')
+  let queryParams = {
+    sp: input.permissions ?? '',
+    st: input.startsOn ? truncatedISO8061Date(input.startsOn) : '',
+    se: truncatedISO8061Date(input.expiresOn),
+    name: getCanonicalName(input.accountName, input.containerName, input.blobName),
+    si: input.identifier ?? '',
+    sip: input.ipRange ?? '',
+    spr: input.protocol ?? '',
+    sv: version,
+    sr: resource,
+    ne: signedSnapshotTime,
+    rscc: input.cacheControl ?? '',
+    rscd: input.contentDisposition ?? '',
+    rsce: input.contentEncoding ?? '',
+    rscl: input.contentLanguage ?? '',
+    rsct: input.contentType ?? '',
+  }
+
+  const stringToSign = Object.values(queryParams).join('\n')
 
   const signature = await computeHMACSHA256(stringToSign, input.accountKey)
+  const { name, ne, ...rest } = queryParams
 
-  return `sv=${version}&spr=https&se=${encodeURIComponent(
-    truncatedISO8061Date(input.expiresOn)
-  )}&sr=b&sp=rw&sig=${encodeURIComponent(signature)}`
+  //@ts-ignore
+  queryParams.sig = signature
+
+  return Object.keys({ ...rest, ...{ sig: signature } })
+    .map((key) => {
+      if (queryParams[key] === '') return
+
+      return `${key}=${encodeURIComponent(queryParams[key])}`
+    })
+    .join('&')
 }
 
-export default async (input: SASinput) => {
-  const url = [input.containerName, input.blobName].filter(el => el).join('/')
+const createBlobSas = async (input: SASinput) => {
+  const url = [input.containerName, input.blobName].filter((el) => el).join('/')
   const storageUri = new URL(url, `https://${input.accountName}.blob.core.windows.net`)
   const queryParams = await getSASqueryParams(input)
 
   storageUri.search = queryParams
 
   return {
-    blobSasUrl: url.toString(),
+    blobSasUrl: storageUri.toString(),
   }
 }
+
+export { createBlobSas }
