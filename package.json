@@ -1,0 +1,29 @@
+{
+  "name": "@neurocode.io/azure-sas-token",
+  "version": "1.0.0",
+  "description": "Cloudflare worker app to issue limited access to Azure Storage resources using shared access signatures (SAS)",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "source": "src/index.ts",
+  "repository": "https://github.com/neurocode-io/azure-sas-token",
+  "author": "neurocode I/O GmbH <info@neurocode.io>",
+  "homepage": "https://github.com/neurocode-io/azure-sas-token/tree/master/README.md",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "format": "prettier --write '**/*.{ts,js,css,json,md}'"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@cloudflare/workers-types": "^2.0.0",
+    "prettier": "^2.1.2",
+    "ts-loader": "^8.0.4",
+    "typescript": "^4.0.3"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true,
+    "printWidth": 120
+  }
+}

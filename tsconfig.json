@@ -1,0 +1,18 @@
+
+{
+  "compilerOptions": {
+    "target": "es2019",
+    "lib": ["esnext", "WebWorker"],
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
+    "removeComments": true,
+    "types": [],
+    "outDir": "./dist"
+  }
+}
