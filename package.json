@@ -10,6 +10,7 @@
   "homepage": "https://github.com/neurocode-io/azure-sas-token/tree/master/README.md",
   "license": "MIT",
   "scripts": {
+    "test": "echo hello",
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "format": "prettier --write '**/*.{ts,js,css,json,md}'"
