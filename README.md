@@ -9,8 +9,8 @@ We used it in our [sepa-form-recogizer](https://neurocode.io/blog/sepa-payment-r
 
 ![sas](./sas-storage-uri.png)
 
-s
-The SAS token is a string that you generate on give your client for temp access to your Azure storage. The Azure Storage client library does not work in the browser since it uses NodeJS crypto to compute the HMAC SHA256.
+
+SAS token is a string that you generate on give your client for temp access to your Azure storage. The Azure Storage client library does not work in the browser since it uses NodeJS crypto to compute the HMAC SHA256.
 
 This library uses webCrypto to compute the HMAC SHA and is thus compatible with cloudflare workers.
 
