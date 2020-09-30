@@ -31,5 +31,8 @@
     "semi": false,
     "singleQuote": true,
     "printWidth": 120
-  }
+  },
+  "np": {
+		"contents": "dist"
+	}
 }
