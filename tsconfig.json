@@ -11,6 +11,7 @@
     "noFallthroughCasesInSwitch": true,
     "forceConsistentCasingInFileNames": true,
     "removeComments": true,
+    "declaration": true,
     "outDir": "./dist"
   }
 }
