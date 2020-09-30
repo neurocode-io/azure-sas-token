@@ -1,6 +1,6 @@
 {
   "name": "@neurocode.io/azure-sas-token",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Cloudflare worker app to issue limited access to Azure Storage resources using shared access signatures (SAS)",
   "keywords": [
     "azure-sas-token",
