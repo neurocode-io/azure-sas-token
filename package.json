@@ -9,6 +9,13 @@
   ],
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/**/*",
+    "tsconfig.json",
+    "README.md",
+    "package.json"
+  ],
   "module": "dist/index.js",
   "source": "src/index.ts",
   "repository": "https://github.com/neurocode-io/azure-sas-token",
