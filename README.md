@@ -1,5 +1,12 @@
 # Azure-SAS-token
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=NeuroCode-io_azure-sas-token&metric=alert_status)](https://sonarcloud.io/dashboard?id=NeuroCode-io_azure-sas-token)
+[![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=NeuroCode-io_azure-sas-token&metric=sqale_rating)](https://sonarcloud.io/dashboard?id=NeuroCode-io_azure-sas-token)
+[![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=NeuroCode-io_azure-sas-token&metric=reliability_rating)](https://sonarcloud.io/dashboard?id=NeuroCode-io_azure-sas-token)
+[![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=NeuroCode-io_azure-sas-token&metric=security_rating)](https://sonarcloud.io/dashboard?id=NeuroCode-io_azure-sas-token)
+[![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=NeuroCode-io_azure-sas-token&metric=vulnerabilities)](https://sonarcloud.io/dashboard?id=NeuroCode-io_azure-sas-token)
+
+
 Generate Azure SAS tokens on the edge with cloudflare workers and this library. 
 This library has zero depdendencies.
 
