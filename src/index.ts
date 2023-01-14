@@ -25,10 +25,11 @@ const truncatedISO8061Date = (date: Date) => {
 const computeHMACSHA256 = async (stringToSign: string, accountKey: string): Promise<string> => {
   const enc = new TextEncoder()
   const signatureUTF8 = enc.encode(stringToSign)
+  const keyData = enc.encode(btoa(accountKey))
+
   const key = await crypto.subtle.importKey(
     'raw',
-    //@ts-ignore
-    Buffer.from(accountKey, 'base64'),
+    keyData,
     {
       name: 'HMAC',
       hash: {
@@ -38,11 +39,9 @@ const computeHMACSHA256 = async (stringToSign: string, accountKey: string): Prom
     false,
     ['sign']
   )
-
   const digest = await crypto.subtle.sign('HMAC', key, signatureUTF8)
 
-  //@ts-ignore
-  return Buffer.from(digest).toString('base64')
+  return btoa(String.fromCharCode(...new Uint8Array(digest)))
 }
 
 const getCanonicalName = (accountName: string, containerName: string, blobName?: string) => {
@@ -90,6 +89,7 @@ const getSASqueryParams = async (input: SASinput) => {
 
       return `${key}=${encodeURIComponent(queryParams[key])}`
     })
+    .filter((el) => el)
     .join('&')
 }
 
