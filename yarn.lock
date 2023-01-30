@@ -3,9 +3,9 @@
 
 
 "@cloudflare/workers-types@^4.20221111.1":
-  version "4.20221111.1"
-  resolved "https://registry.yarnpkg.com/@cloudflare/workers-types/-/workers-types-4.20221111.1.tgz#c3dbb5ef52cf5fab275803ece0424b205c78ad3e"
-  integrity sha512-BNV2wN8V6Zduvo7UzxcdjBbLQ906D2KhS804PDufLgx/sanGJCHVJMOIaLvS/b61JKtot1U7P/l1fjrjZ7/E3A==
+  version "4.20230115.0"
+  resolved "https://registry.yarnpkg.com/@cloudflare/workers-types/-/workers-types-4.20230115.0.tgz#84e6c7b1a753098dbc7cd718fdcf191c215225af"
+  integrity sha512-GPJEiO8AFN+jUpA+DHJ1qdVmk4s/hq8JYKjOV/+U7avGquQbVnj905+Kg6uAEfrq16muwmRKl+XJGqsvlBlDNg==
 
 prettier@^2.8.3:
   version "2.8.3"
